@@ -1,1 +1,68 @@
-<p>register works!</p>
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="/assets/images/avatar_2x.png"
+      class="profile-img-card"
+      alt="avatar"
+    />
+
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username"
+        />
+        <div class="alert-danger">
+          <div>Username is required</div>
+          <div>Username must be at least 3 characters</div>
+          <div>Username must be at most 20 characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          id="email"
+        />
+        <div class="alert-danger">
+          <div>Email is required</div>
+          <div>Email must be at most 50 characters</div>
+          <div>Email must be a valid email address</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+        >
+        <div class="alert-danger">
+          <div>Password is required</div>
+          <div>Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary col-12">Sign Up</button>
+      </div>
+
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Your registration is successful!
+    </div>
+
+  </div>
+</div>
