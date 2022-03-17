@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-register',
@@ -7,13 +8,16 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  isSuccessful: boolean = false;
-  regForm!: FormGroup;
 
-  constructor() { }
+  registrationForm!: FormGroup;
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.regForm = new FormGroup({
+    this.registrationForm = new FormGroup({
       "username": new FormControl(null,
         [
           Validators.required,
@@ -34,4 +38,17 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  onSubmit(): void {
+    this.authenticationService.register(this.registrationForm.value).subscribe({
+      next: value => {
+        console.log(value);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    })
+  }
 }

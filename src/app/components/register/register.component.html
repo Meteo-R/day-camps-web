@@ -10,7 +10,9 @@
     <form
       *ngIf="!isSuccessful"
       name="form"
-      [formGroup]="regForm"
+      [formGroup]="registrationForm"
+      (ngSubmit)="onSubmit()"
+      #ngForm="ngForm"
     >
       <div class="form-group">
         <label for="username">Username</label>
@@ -22,13 +24,13 @@
           formControlName="username"
         />
         <div class="alert-danger">
-          <div *ngIf="regForm.get('username')?.hasError('required') && regForm.get('username')?.touched">
+          <div *ngIf="registrationForm.get('username')?.hasError('required') && registrationForm.get('username')?.touched">
             Username is required
           </div>
-          <div *ngIf="regForm.get('username')?.hasError('minlength') && regForm.get('username')?.touched">
+          <div *ngIf="registrationForm.get('username')?.hasError('minlength') && registrationForm.get('username')?.touched">
             Username must be at least 3 characters
           </div>
-          <div *ngIf="regForm.get('username')?.hasError('maxlength') && regForm.get('username')?.touched">
+          <div *ngIf="registrationForm.get('username')?.hasError('maxlength') && registrationForm.get('username')?.touched">
             Username must be at most 20 characters
           </div>
         </div>
@@ -43,13 +45,13 @@
           formControlName="email"
         />
         <div class="alert-danger">
-          <div *ngIf="regForm.get('email')?.hasError('required') && regForm.get('email')?.touched">
+          <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched">
             Email is required
           </div>
-          <div *ngIf="regForm.get('email')?.hasError('maxlength') && regForm.get('email')?.touched">
+          <div *ngIf="registrationForm.get('email')?.hasError('maxlength') && registrationForm.get('email')?.touched">
             Email must be at most 50 characters
           </div>
-          <div *ngIf="regForm.get('email')?.hasError('email') && regForm.get('email')?.touched">
+          <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched">
             Email must be a valid email address
           </div>
         </div>
@@ -64,19 +66,22 @@
           formControlName="password"
         >
         <div class="alert-danger">
-          <div *ngIf="regForm.get('password')?.hasError('required') && regForm.get('password')?.touched">
+          <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
             Password is required
           </div>
-          <div *ngIf="regForm.get('password')?.hasError('minlength') && regForm.get('password')?.touched">
+          <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
             Password must be at least 6 characters
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <button [disabled]="regForm.invalid" class="btn btn-primary col-12">Sign Up</button>
+        <button [disabled]="registrationForm.invalid" class="btn btn-primary col-12">Sign Up</button>
       </div>
 
+      <div class="alert alert-warning" *ngIf="ngForm.submitted && isSignUpFailed">
+        Signup failed!<br>{{ errorMessage }}
+      </div>
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">
