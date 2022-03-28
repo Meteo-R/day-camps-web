@@ -21,7 +21,7 @@ export class AuthenticationService {
       username: registrationForm.username,
       email: registrationForm.email,
       password: registrationForm.password,
-      role: 'ROLE_PARENT'
+      role: registrationForm.role
       }, httpOptions);
   }
 

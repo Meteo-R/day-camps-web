@@ -24,13 +24,16 @@
           formControlName="username"
         />
         <div class="alert-danger">
-          <div *ngIf="registrationForm.get('username')?.hasError('required') && registrationForm.get('username')?.touched">
+          <div
+            *ngIf="registrationForm.get('username')?.hasError('required') && registrationForm.get('username')?.touched">
             Username is required
           </div>
-          <div *ngIf="registrationForm.get('username')?.hasError('minlength') && registrationForm.get('username')?.touched">
+          <div
+            *ngIf="registrationForm.get('username')?.hasError('minlength') && registrationForm.get('username')?.touched">
             Username must be at least 3 characters
           </div>
-          <div *ngIf="registrationForm.get('username')?.hasError('maxlength') && registrationForm.get('username')?.touched">
+          <div
+            *ngIf="registrationForm.get('username')?.hasError('maxlength') && registrationForm.get('username')?.touched">
             Username must be at most 20 characters
           </div>
         </div>
@@ -66,11 +69,31 @@
           formControlName="password"
         >
         <div class="alert-danger">
-          <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
+          <div
+            *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
             Password is required
           </div>
-          <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
+          <div
+            *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
             Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select
+          type="text"
+          class="form-control"
+          name="role"
+          id="role"
+          formControlName="role"
+        >
+          <option value="ROLE_PARENT">PARENT</option>
+          <option value="ROLE_SCHOOL">SCHOOL</option>
+        </select>
+        <div class="alert-danger">
+          <div *ngIf="registrationForm.get('role')?.hasError('required') && registrationForm.get('role')?.touched">
+            Role is required
           </div>
         </div>
       </div>
