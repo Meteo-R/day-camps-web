@@ -1,1 +1,74 @@
-<p>login works!</p>
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="/assets/images/avatar_2x.png"
+      class="profile-img-card"
+      alt="avatar"
+    />
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      #ngForm="ngForm"
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          id="username"
+          formControlName="username"
+        />
+        <div class="alert-danger">
+          <div
+            *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">
+            Username is required
+          </div>
+          <div
+            *ngIf="loginForm.get('username')?.hasError('minlength') && loginForm.get('username')?.touched">
+            Username must be at least 3 characters
+          </div>
+          <div
+            *ngIf="loginForm.get('username')?.hasError('maxlength') && loginForm.get('username')?.touched">
+            Username must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          formControlName="password"
+        />
+        <div class="alert-danger">
+          <div
+            *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+            Password is required
+          </div>
+          <div
+            *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="loginForm.invalid" class="btn btn-primary col-12">Log In</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="ngForm.submitted && isLoginFailed">
+        Login failed!<br>{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Logged in!
+    </div>
+  </div>
+</div>

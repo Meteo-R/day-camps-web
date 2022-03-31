@@ -25,4 +25,11 @@ export class AuthenticationService {
       }, httpOptions);
   }
 
+  login(loginForm: any): Observable<any> {
+    return this.http.post(AUTHENTICATION_API + '/sign-in', {
+      username: loginForm.username,
+      password: loginForm.password
+    })
+  }
+
 }
