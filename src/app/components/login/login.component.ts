@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services/authentication.service";
+import {TokenStorageService} from "../../services/token-storage.service";
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,10 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
 
-  constructor(private authenticationService: AuthenticationService/*TODO , private tokenStorage: TokenStorageService*/) { }
+  constructor(private authenticationService: AuthenticationService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    if (/*this.tokenStorage.getToken()*/false) {
+    if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
     }
 
@@ -40,8 +41,8 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
     this.authenticationService.login(this.loginForm.value).subscribe({
       next: value => {
-        // TODO this.tokenStorage.saveToken(value.token);
-        // TODO this.tokenStorage.saveUser(value);
+        this.tokenStorage.saveToken(value.token);
+        this.tokenStorage.saveUser(value);
 
         console.log(value.token);
         console.log(value);
