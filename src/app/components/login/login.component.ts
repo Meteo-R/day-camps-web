@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services/authentication.service";
 import {TokenStorageService} from "../../services/token-storage.service";
+import {RoleMapperService} from "../../services/mappers/role-mapper.service";
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,16 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
+  readableRoles: string[] = [];
 
-  constructor(private authenticationService: AuthenticationService, private tokenStorage: TokenStorageService) { }
+  constructor(private authenticationService: AuthenticationService,
+              private tokenStorageService: TokenStorageService,
+              private roleMapperService: RoleMapperService) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
+    if (this.tokenStorageService.getToken()) {
       this.isLoggedIn = true;
+      this.readableRoles = this.getReadableRoles();
     }
 
     this.loginForm = new FormGroup({
@@ -41,14 +46,15 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
     this.authenticationService.login(this.loginForm.value).subscribe({
       next: value => {
-        this.tokenStorage.saveToken(value.token);
-        this.tokenStorage.saveUser(value);
+        this.tokenStorageService.saveToken(value.token);
+        this.tokenStorageService.saveUser(value);
 
         console.log(value.token);
         console.log(value);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
+        this.readableRoles = this.getReadableRoles();
         this.reloadPage();
       },
       error: err => {
@@ -60,5 +66,9 @@ export class LoginComponent implements OnInit {
 
   reloadPage(): void {
     window.location.reload();
+  }
+
+  private getReadableRoles() {
+    return this.roleMapperService.mapToReadableRoles(this.tokenStorageService.getUser().roles);
   }
 }
