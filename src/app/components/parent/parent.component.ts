@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-parent',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./parent.component.css']
 })
 export class ParentComponent implements OnInit {
+  content!: string;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private userService: UserService) {
   }
 
+  ngOnInit(): void {
+    this.userService.getParentBoard().subscribe({
+      next: value => {
+        this.content = value;
+      },
+      error: err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    })
+  }
 }

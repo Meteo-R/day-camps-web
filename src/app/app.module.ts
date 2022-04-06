@@ -14,6 +14,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ParentComponent } from './components/parent/parent.component';
 import { SchoolComponent } from './components/school/school.component';
 
+import { authInterceptorProviders } from "./services/helpers/auth.interceptor";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,7 @@ import { SchoolComponent } from './components/school/school.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

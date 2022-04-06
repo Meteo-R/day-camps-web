@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-school',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./school.component.css']
 })
 export class SchoolComponent implements OnInit {
+  content!: string;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private userService: UserService) {
   }
 
+  ngOnInit(): void {
+    this.userService.getSchoolBoard().subscribe({
+      next: value => {
+        this.content = value;
+      },
+      error: err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    })
+  }
 }
