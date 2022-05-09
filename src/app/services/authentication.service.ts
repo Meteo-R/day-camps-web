@@ -21,7 +21,12 @@ export class AuthenticationService {
       username: registrationForm.username,
       email: registrationForm.email,
       password: registrationForm.password,
-      role: registrationForm.role
+      role: registrationForm.role,
+      phone: registrationForm.phone,
+      firstName: registrationForm.firstName,
+      lastName: registrationForm.lastName,
+      schoolName: registrationForm.schoolName,
+      schoolAddress: registrationForm.schoolAddress
       }, httpOptions);
   }
 

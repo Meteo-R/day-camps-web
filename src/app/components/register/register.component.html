@@ -60,6 +60,27 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          type="text"
+          class="form-control"
+          name="phone"
+          id="phone"
+          formControlName="phone"
+        />
+        <div class="alert-danger">
+          <div *ngIf="registrationForm.get('phone')?.hasError('required') && registrationForm.get('phone')?.touched">
+            Phone is required
+          </div>
+          <div *ngIf="registrationForm.get('phone')?.hasError('maxlength') && registrationForm.get('phone')?.touched">
+            Phone must be at most 20 characters
+          </div>
+          <div *ngIf="registrationForm.get('phone')?.hasError('pattern') && registrationForm.get('phone')?.touched">
+            Must be a valid phone number with no spaces or dashes
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="password">Password</label>
         <input
           type="password"
@@ -87,6 +108,8 @@
           name="role"
           id="role"
           formControlName="role"
+          [(ngModel)]="role"
+          (change)="onRoleChange()"
         >
           <option value="ROLE_PARENT">PARENT</option>
           <option value="ROLE_SCHOOL">SCHOOL</option>
@@ -94,6 +117,70 @@
         <div class="alert-danger">
           <div *ngIf="registrationForm.get('role')?.hasError('required') && registrationForm.get('role')?.touched">
             Role is required
+          </div>
+        </div>
+      </div>
+      <div *ngIf="role === 'ROLE_PARENT'" class="form-group">
+        <label for="firstName">First name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          id="firstName"
+          formControlName="firstName"
+        />
+        <div class="alert-danger">
+          <div
+            *ngIf="registrationForm.get('firstName')?.hasError('required') && registrationForm.get('firstName')?.touched">
+            First name is required
+          </div>
+        </div>
+      </div>
+      <div *ngIf="role === 'ROLE_PARENT'" class="form-group">
+        <label for="lastName">Last name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          id="lastName"
+          formControlName="lastName"
+        />
+        <div class="alert-danger">
+          <div
+            *ngIf="registrationForm.get('lastName')?.hasError('required') && registrationForm.get('lastName')?.touched">
+            Last name is required
+          </div>
+        </div>
+      </div>
+      <div *ngIf="role === 'ROLE_SCHOOL'" class="form-group">
+        <label for="schoolName">School name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="schoolName"
+          id="schoolName"
+          formControlName="schoolName"
+        />
+        <div class="alert-danger">
+          <div
+            *ngIf="registrationForm.get('schoolName')?.hasError('required') && registrationForm.get('schoolName')?.touched">
+            School name is required
+          </div>
+        </div>
+      </div>
+      <div *ngIf="role === 'ROLE_SCHOOL'" class="form-group">
+        <label for="schoolAddress">School address</label>
+        <input
+          type="text"
+          class="form-control"
+          name="schoolAddress"
+          id="schoolAddress"
+          formControlName="schoolAddress"
+        />
+        <div class="alert-danger">
+          <div
+            *ngIf="registrationForm.get('schoolAddress')?.hasError('required') && registrationForm.get('schoolAddress')?.touched">
+            School address is required
           </div>
         </div>
       </div>
