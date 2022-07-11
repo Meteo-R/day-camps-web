@@ -108,8 +108,7 @@
           name="role"
           id="role"
           formControlName="role"
-          [(ngModel)]="role"
-          (change)="onRoleChange()"
+          (ngModelChange)="onRoleChange($event)"
         >
           <option value="ROLE_PARENT">PARENT</option>
           <option value="ROLE_SCHOOL">SCHOOL</option>

@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-  role: any;
+  role!: string;
 
   constructor(private authenticationService: AuthenticationService) {
   }
@@ -64,11 +64,13 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  onRoleChange() {
+  onRoleChange(newValue: string) {
     this.registrationForm.removeControl("firstName");
     this.registrationForm.removeControl("lastName");
     this.registrationForm.removeControl("schoolName");
     this.registrationForm.removeControl("schoolAddress");
+
+    this.role = newValue;
 
     if (this.role === 'ROLE_PARENT') {
       this.registrationForm.addControl(
