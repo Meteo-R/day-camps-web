@@ -1,0 +1,16 @@
+.container {
+  border-style: solid;
+  margin: 2px;
+}
+
+.last-spots {
+  color: limegreen;
+}
+
+.enrollment-closed {
+  color: firebrick;
+}
+
+.first-column {
+  padding-right: 0.5em;
+}

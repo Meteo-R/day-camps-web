@@ -15,6 +15,8 @@ import { ParentComponent } from './components/parent/parent.component';
 import { SchoolComponent } from './components/school/school.component';
 
 import { authInterceptorProviders } from "./services/helpers/auth.interceptor";
+import { DayCampsComponent } from './components/day-camps/day-camps.component';
+import { DayCampComponent } from './components/day-camp/day-camp.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { authInterceptorProviders } from "./services/helpers/auth.interceptor";
     RegisterComponent,
     ProfileComponent,
     ParentComponent,
-    SchoolComponent
+    SchoolComponent,
+    DayCampsComponent,
+    DayCampComponent
   ],
   imports: [
     BrowserModule,

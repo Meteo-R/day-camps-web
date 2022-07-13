@@ -1,0 +1,39 @@
+<div class="container">
+  <h3>
+    {{ dayCamp.name }}
+    <span *ngIf="dayCamp.capacity-dayCamp.numberOfEnrolled>=2 && dayCamp.capacity-dayCamp.numberOfEnrolled<=3"
+          class="last-spots">(last spots!)</span>
+    <span *ngIf="dayCamp.capacity-dayCamp.numberOfEnrolled==1" class="last-spots">(last spot!)</span>
+    <span *ngIf="dayCamp.capacity-dayCamp.numberOfEnrolled<=0" class="enrollment-closed">(enrollment closed)</span>
+  </h3>
+  <div>
+    {{ dayCamp.description }}
+  </div>
+
+  <table>
+    <tr>
+      <td class="fw-bold first-column">Date:</td>
+      <td>{{ dayCamp.startDate }} to {{ dayCamp.endDate }}</td>
+    </tr>
+    <tr>
+      <td class="fw-bold first-column">Price:</td>
+      <td>{{ dayCamp.price }} zł</td>
+    </tr>
+    <tr>
+      <td class="fw-bold first-column">Enrolled:</td>
+      <td>{{ dayCamp.numberOfEnrolled }} child<span *ngIf="dayCamp.numberOfEnrolled!=1">ren</span></td>
+    </tr>
+    <tr>
+      <td class="fw-bold first-column">Capacity:</td>
+      <td>{{ dayCamp.capacity }} child<span *ngIf="dayCamp.capacity!=1">ren</span></td>
+    </tr>
+    <tr>
+      <td class="fw-bold first-column">School:</td>
+      <td>{{ dayCamp.school.name }}, {{ dayCamp.school.address }}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>email: {{ dayCamp.school.email }}, phone: {{ dayCamp.school.phone }}</td>
+    </tr>
+  </table>
+</div>
