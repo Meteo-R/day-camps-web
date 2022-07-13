@@ -8,15 +8,33 @@ import {DayCampsService} from "../../services/day-camps.service";
   styleUrls: ['./day-camps.component.css']
 })
 export class DayCampsComponent implements OnInit {
-  public dayCamps!: DayCamp[];
+  public futureDayCamps!: DayCamp[];
+  public ongoingDayCamps!: DayCamp[];
+  public pastDayCamps!: DayCamp[];
 
   constructor(private dayCampsService: DayCampsService) {
   }
 
   ngOnInit(): void {
-    this.dayCampsService.getDayCamps().subscribe({
+    this.dayCampsService.getFutureDayCamps().subscribe({
       next: value => {
-        this.dayCamps = value.dayCamps;
+        this.futureDayCamps = value.dayCamps;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+    this.dayCampsService.getOngoingDayCamps().subscribe({
+      next: value => {
+        this.ongoingDayCamps = value.dayCamps;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+    this.dayCampsService.getPastDayCamps().subscribe({
+      next: value => {
+        this.pastDayCamps = value.dayCamps;
       },
       error: err => {
         console.log(err);

@@ -1,3 +1,16 @@
-<div class="container">
-  <app-day-camp *ngFor="let dayCamp of dayCamps" [dayCamp]="dayCamp"></app-day-camp>
+<div>
+  <h2>Upcoming day camps</h2>
+  <div class="container">
+    <app-day-camp *ngFor="let futureDayCamp of futureDayCamps" [dayCamp]="futureDayCamp"></app-day-camp>
+  </div>
+
+  <h2>Ongoing day camps</h2>
+  <div class="container">
+    <app-day-camp *ngFor="let ongoingDayCamp of ongoingDayCamps" [dayCamp]="ongoingDayCamp"></app-day-camp>
+  </div>
+
+  <h2>Completed day camps</h2>
+  <div class="container">
+    <app-day-camp *ngFor="let pastDayCamp of pastDayCamps" [dayCamp]="pastDayCamp"></app-day-camp>
+  </div>
 </div>
