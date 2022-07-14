@@ -17,6 +17,9 @@ import { SchoolComponent } from './components/school/school.component';
 import { authInterceptorProviders } from "./services/helpers/auth.interceptor";
 import { DayCampsComponent } from './components/day-camps/day-camps.component';
 import { DayCampComponent } from './components/day-camp/day-camp.component';
+import { MyChildrenComponent } from './components/parent/my-children/my-children.component';
+import { EnrollChildComponent } from './components/parent/enroll-child/enroll-child.component';
+import { EnrollmentsComponent } from './components/parent/enrollments/enrollments.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { DayCampComponent } from './components/day-camp/day-camp.component';
     ParentComponent,
     SchoolComponent,
     DayCampsComponent,
-    DayCampComponent
+    DayCampComponent,
+    MyChildrenComponent,
+    EnrollChildComponent,
+    EnrollmentsComponent
   ],
   imports: [
     BrowserModule,

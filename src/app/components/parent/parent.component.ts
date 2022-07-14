@@ -6,7 +6,7 @@ import {UserService} from "../../services/user.service";
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.css']
 })
-export class ParentComponent implements OnInit {
+export class ParentComponent implements OnInit { // TODO delete this component
   content!: string;
 
   constructor(private userService: UserService) {

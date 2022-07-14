@@ -5,8 +5,13 @@
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="/home">Home</a>
       </li>
-      <li class="nav-item" *ngIf="showParentBoard">
-        <a href="/parent" class="nav-link" routerLink="/parent">For parents</a>
+      <li ngbDropdown class="nav-item dropdown" *ngIf="showParentBoard">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">For parents</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a ngbDropdownItem class="dropdown-item" href="/parent/my-children">My children</a>
+          <a ngbDropdownItem class="dropdown-item" href="/parent/enroll-child">Enroll child</a>
+          <a ngbDropdownItem class="dropdown-item" href="/parent/enrollments">Enrollments</a>
+        </div>
       </li>
       <li class="nav-item" *ngIf="showSchoolBoard">
         <a href="/school" class="nav-link" routerLink="/school">For schools</a>
