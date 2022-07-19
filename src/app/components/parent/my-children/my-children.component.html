@@ -1,1 +1,14 @@
-<p>my-children works!</p>
+<div>
+  <h2>My children</h2>
+  <div>
+    <table class="table-bordered center">
+      <ng-container *ngFor="let child of children">
+        <tr>
+          <td><h3>{{child.firstName}} {{child.lastName}}</h3></td>
+          <td>TODO edit {{child.id}}</td>
+          <td>TODO delete</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</div>
