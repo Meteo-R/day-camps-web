@@ -1,14 +1,72 @@
 <div>
-  <h2>My children</h2>
+  <h2 class="mt-5">My children</h2>
   <div>
-    <table class="table-bordered center">
+    <table class="table-bordered">
       <ng-container *ngFor="let child of children">
         <tr>
-          <td><h3>{{child.firstName}} {{child.lastName}}</h3></td>
-          <td>TODO edit {{child.id}}</td>
-          <td>TODO delete</td>
+          <td class="p-1"><h3>{{child.firstName}} {{child.lastName}}</h3></td>
+          <td class="p-1 fit-width-to-content">
+            <button class="btn btn-outline-success m-1">Edit</button>
+          </td>
+          <td class="p-1 fit-width-to-content">
+            <button class="btn btn-outline-danger m-1">Delete</button>
+          </td>
         </tr>
       </ng-container>
     </table>
   </div>
+  <div class="text-center mt-3">
+    <button class="btn btn-primary" (click)="openModal(content)">Add child</button>
+  </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add child</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form
+      [formGroup]="addChildForm"
+    >
+      <div class="form-group">
+        <label for="firstName">First name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          id="firstName"
+          formControlName="firstName"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addChildForm.get('firstName')?.hasError('required') && addChildForm.get('firstName')?.touched">
+            First name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          id="lastName"
+          formControlName="lastName"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addChildForm.get('lastName')?.hasError('required') && addChildForm.get('lastName')?.touched">
+            Last name is required
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">
+      Cancel
+    </button>
+    <button class="btn btn-primary" [disabled]="addChildForm.invalid" (click)="onSubmit(); modal.close();">
+      Submit
+    </button>
+  </div>
+</ng-template>
