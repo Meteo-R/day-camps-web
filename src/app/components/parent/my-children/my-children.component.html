@@ -9,21 +9,21 @@
             <button class="btn btn-outline-success m-1">Edit</button>
           </td>
           <td class="p-1 fit-width-to-content">
-            <button class="btn btn-outline-danger m-1">Delete</button>
+            <button class="btn btn-outline-danger m-1" (click)="openDeleteChildModal(deleteChildContent, child)">Delete</button>
           </td>
         </tr>
       </ng-container>
     </table>
   </div>
   <div class="text-center mt-3">
-    <button class="btn btn-primary" (click)="openModal(content)">Add child</button>
+    <button class="btn btn-primary" (click)="openAddChildModal(addChildContent)">Add child</button>
   </div>
 </div>
 
-<ng-template #content let-modal>
+<ng-template #addChildContent let-addChildModal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add child</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <h4 class="modal-title">Add child</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="addChildModal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
     <form
@@ -62,11 +62,36 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-secondary" (click)="modal.close()">
+    <button class="btn btn-secondary" (click)="addChildModal.close()">
       Cancel
     </button>
-    <button class="btn btn-primary" [disabled]="addChildForm.invalid" (click)="onSubmit(); modal.close();">
+    <button class="btn btn-primary" [disabled]="addChildForm.invalid" (click)="onAddChildSubmit(); addChildModal.close();">
       Submit
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #deleteChildContent let-deleteChildModal>
+  <div class="modal-header">
+    <h4 class="modal-title" *ngIf="isChildDeletable">Confirm delete</h4>
+    <h4 class="modal-title" *ngIf="!isChildDeletable">Cannot delete</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="deleteChildModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body" *ngIf="isChildDeletable">
+    <p>Are you sure you want to delete {{childToDelete?.firstName}} {{childToDelete?.lastName}} from your children list?</p>
+  </div>
+  <div class="modal-body" *ngIf="!isChildDeletable">
+    <p>You cannot delete {{childToDelete?.firstName}} {{childToDelete?.lastName}} as this child is or was enrolled in a day camp.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" *ngIf="isChildDeletable" (click)="deleteChildModal.close()">
+      Cancel
+    </button>
+    <button class="btn btn-primary" *ngIf="isChildDeletable" (click)="onDeleteChildSubmit(); deleteChildModal.close();">
+      Submit
+    </button>
+    <button class="btn btn-primary" *ngIf="!isChildDeletable" (click)="deleteChildModal.close();">
+      OK
     </button>
   </div>
 </ng-template>

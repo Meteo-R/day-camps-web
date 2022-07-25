@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChildrenService} from "../../../services/children.service";
 import {Child} from "../../../model/interfaces/child";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -12,6 +12,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class MyChildrenComponent implements OnInit {
   public children!: Child[];
   addChildForm!: FormGroup;
+  childToDelete?: Child | null;
+  isChildDeletable: boolean = false;
 
   constructor(
     private childrenService: ChildrenService,
@@ -28,14 +30,28 @@ export class MyChildrenComponent implements OnInit {
     this.getChildren();
   }
 
-  openModal(modal: any) {
+  openAddChildModal(modal: any) {
     this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'}).result.then(
       result => this.addChildForm.reset(),
       reason => this.addChildForm.reset()
     )
   }
 
-  onSubmit(): void {
+  openDeleteChildModal(modal: any, child: Child) {
+    this.childToDelete = child;
+    this.childrenService.isChildEnrolledInAnyDayCamp(child.id).subscribe({
+      next: value => {
+        this.isChildDeletable = !value.childEnrolledInAnyDayCamp;
+        this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'}).result.then(
+          result => this.resetChildToDelete(),
+          reason => this.resetChildToDelete()
+        )
+      },
+      error: err => console.log(err)
+      })
+  }
+
+  onAddChildSubmit(): void {
     this.childrenService.addChild(this.addChildForm).subscribe({
       next: value => this.getChildren(),
       error: err => {
@@ -43,6 +59,21 @@ export class MyChildrenComponent implements OnInit {
       }
     });
     this.addChildForm.reset();
+  }
+
+  onDeleteChildSubmit(): void {
+    this.childrenService.deleteChild(this.childToDelete!.id).subscribe({
+      next: () => this.getChildren(),
+      error: err => {
+        console.log(err);
+      }
+    });
+    this.resetChildToDelete();
+  }
+
+  private resetChildToDelete() {
+    this.childToDelete = null;
+    this.isChildDeletable = false;
   }
 
   private getChildren(): void {
