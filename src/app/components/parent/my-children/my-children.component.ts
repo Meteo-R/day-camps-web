@@ -11,9 +11,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class MyChildrenComponent implements OnInit {
   public children!: Child[];
-  addChildForm!: FormGroup;
-  childToDelete?: Child | null;
-  isChildDeletable: boolean = false;
+  public addChildForm!: FormGroup;
+  public editChildForm!: FormGroup;
+  public childToDelete?: Child | null;
+  public isChildDeletable: boolean = false;
 
   constructor(
     private childrenService: ChildrenService,
@@ -23,6 +24,11 @@ export class MyChildrenComponent implements OnInit {
 
   ngOnInit(): void {
     this.addChildForm = new FormGroup({
+      "firstName": new FormControl(null, [Validators.required]),
+      "lastName": new FormControl(null, [Validators.required]),
+    });
+    this.editChildForm = new FormGroup({
+      "id": new FormControl(null),
       "firstName": new FormControl(null, [Validators.required]),
       "lastName": new FormControl(null, [Validators.required]),
     });
@@ -51,6 +57,19 @@ export class MyChildrenComponent implements OnInit {
       })
   }
 
+  openEditChildModal(modal: any, child: Child) {
+    this.editChildForm = new FormGroup({
+      "id": new FormControl(child.id),
+      "firstName": new FormControl(child.firstName, [Validators.required]),
+      "lastName": new FormControl(child.lastName, [Validators.required]),
+    });
+
+    this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'}).result.then(
+      result => this.editChildForm.reset(),
+      reason => this.editChildForm.reset()
+    )
+  }
+
   onAddChildSubmit(): void {
     this.childrenService.addChild(this.addChildForm).subscribe({
       next: value => this.getChildren(),
@@ -69,6 +88,16 @@ export class MyChildrenComponent implements OnInit {
       }
     });
     this.resetChildToDelete();
+  }
+
+  onEditChildSubmit(): void {
+    this.childrenService.editChild(this.editChildForm).subscribe({
+      next: value => this.getChildren(),
+      error: err => {
+        console.log(err);
+      }
+    });
+    this.editChildForm.reset();
   }
 
   private resetChildToDelete() {

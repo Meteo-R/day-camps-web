@@ -6,7 +6,7 @@
         <tr>
           <td class="p-1"><h3>{{child.firstName}} {{child.lastName}}</h3></td>
           <td class="p-1 fit-width-to-content">
-            <button class="btn btn-outline-success m-1">Edit</button>
+            <button class="btn btn-outline-success m-1" (click)="openEditChildModal(editChildContent, child)">Edit</button>
           </td>
           <td class="p-1 fit-width-to-content">
             <button class="btn btn-outline-danger m-1" (click)="openDeleteChildModal(deleteChildContent, child)">Delete</button>
@@ -23,19 +23,19 @@
 <ng-template #addChildContent let-addChildModal>
   <div class="modal-header">
     <h4 class="modal-title">Add child</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="addChildModal.dismiss('Cross click')"></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="addChildModal.dismiss()"></button>
   </div>
   <div class="modal-body">
     <form
       [formGroup]="addChildForm"
     >
       <div class="form-group">
-        <label for="firstName">First name</label>
+        <label for="addChildFirstName">First name</label>
         <input
           type="text"
           class="form-control"
           name="firstName"
-          id="firstName"
+          id="addChildFirstName"
           formControlName="firstName"
         >
         <div class="alert-danger">
@@ -45,12 +45,12 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="lastName">Last name</label>
+        <label for="addChildLastName">Last name</label>
         <input
           type="text"
           class="form-control"
           name="lastName"
-          id="lastName"
+          id="addChildLastName"
           formControlName="lastName"
         >
         <div class="alert-danger">
@@ -75,7 +75,7 @@
   <div class="modal-header">
     <h4 class="modal-title" *ngIf="isChildDeletable">Confirm delete</h4>
     <h4 class="modal-title" *ngIf="!isChildDeletable">Cannot delete</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="deleteChildModal.dismiss('Cross click')"></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="deleteChildModal.dismiss()"></button>
   </div>
   <div class="modal-body" *ngIf="isChildDeletable">
     <p>Are you sure you want to delete {{childToDelete?.firstName}} {{childToDelete?.lastName}} from your children list?</p>
@@ -92,6 +92,57 @@
     </button>
     <button class="btn btn-primary" *ngIf="!isChildDeletable" (click)="deleteChildModal.close();">
       OK
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #editChildContent let-editChildModal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit child</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="editChildModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <form
+      [formGroup]="editChildForm"
+    >
+      <div class="form-group">
+        <label for="editChildFirstName">First name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          id="editChildFirstName"
+          formControlName="firstName"
+        >
+        <div class="alert-danger">
+          <div *ngIf="editChildForm.get('firstName')?.hasError('required') && editChildForm.get('firstName')?.touched">
+            First name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="editChildLastName">Last name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          id="editChildLastName"
+          formControlName="lastName"
+        >
+        <div class="alert-danger">
+          <div *ngIf="editChildForm.get('lastName')?.hasError('required') && editChildForm.get('lastName')?.touched">
+            Last name is required
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="editChildModal.close()">
+      Cancel
+    </button>
+    <button class="btn btn-primary" [disabled]="editChildForm.invalid" (click)="onEditChildSubmit(); editChildModal.close();">
+      Submit
     </button>
   </div>
 </ng-template>

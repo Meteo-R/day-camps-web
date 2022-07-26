@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {ChildrenResponse} from "../model/interfaces/children-response";
 import {FormGroup} from "@angular/forms";
 import {ChildEnrolledInAnyDayCampResponse} from "../model/interfaces/child-enrolled-in-any-day-camp-response";
@@ -37,5 +37,12 @@ export class ChildrenService {
 
   deleteChild(childId: number): Observable<any> {
     return this.httpClient.delete(CHILDREN_URL + childId);
+  }
+
+  editChild(editChildForm: FormGroup): Observable<any> {
+    return this.httpClient.put(CHILDREN_URL + editChildForm.value.id, {
+      firstName: editChildForm.value.firstName,
+      lastName: editChildForm.value.lastName
+    }, httpOptions)
   }
 }
