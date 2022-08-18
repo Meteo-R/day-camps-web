@@ -6,15 +6,20 @@
         <a href="/home" class="nav-link" routerLink="/home">Home</a>
       </li>
       <li ngbDropdown class="nav-item dropdown" *ngIf="showParentBoard">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">For parents</a>
-        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" type="button" id="dropdownParentMenuButton"
+           aria-haspopup="true" aria-expanded="false">For parents</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownParentMenuButton">
           <a ngbDropdownItem class="dropdown-item" href="/parent/my-children">My children</a>
           <a ngbDropdownItem class="dropdown-item" href="/parent/enroll-child">Enroll child</a>
           <a ngbDropdownItem class="dropdown-item" href="/parent/enrollments">Enrollments</a>
         </div>
       </li>
-      <li class="nav-item" *ngIf="showSchoolBoard">
-        <a href="/school" class="nav-link" routerLink="/school">For schools</a>
+      <li ngbDropdown class="nav-item dropdown" *ngIf="showSchoolBoard">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" type="button"
+           id="dropdownSchoolMenuButton" aria-haspopup="true" aria-expanded="false">For schools</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownSchoolMenuButton">
+          <a ngbDropdownItem class="dropdown-item" href="/school/my-day-camps">My day camps</a>
+        </div>
       </li>
     </ul>
 

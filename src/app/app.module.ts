@@ -20,6 +20,7 @@ import { DayCampComponent } from './components/day-camp/day-camp.component';
 import { MyChildrenComponent } from './components/parent/my-children/my-children.component';
 import { EnrollChildComponent } from './components/parent/enroll-child/enroll-child.component';
 import { EnrollmentsComponent } from './components/parent/enrollments/enrollments.component';
+import { MyDayCampsComponent } from './components/school/my-day-camps/my-day-camps.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EnrollmentsComponent } from './components/parent/enrollments/enrollment
     DayCampComponent,
     MyChildrenComponent,
     EnrollChildComponent,
-    EnrollmentsComponent
+    EnrollmentsComponent,
+    MyDayCampsComponent
   ],
   imports: [
     BrowserModule,
