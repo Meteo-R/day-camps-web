@@ -10,6 +10,6 @@ export interface DayCamp {
   price: number;
   capacity: number;
   numberOfEnrolled: number;
-  school: School;
-  child: Child[];
+  school?: School;
+  children?: Child[];
 }

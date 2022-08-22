@@ -8,9 +8,9 @@ import {DayCampsService} from "../../services/day-camps.service";
   styleUrls: ['./day-camps.component.css']
 })
 export class DayCampsComponent implements OnInit {
-  public futureDayCamps!: DayCamp[];
-  public ongoingDayCamps!: DayCamp[];
-  public pastDayCamps!: DayCamp[];
+  public futureDayCamps?: DayCamp[];
+  public ongoingDayCamps?: DayCamp[];
+  public pastDayCamps?: DayCamp[];
 
   constructor(private dayCampsService: DayCampsService) {
   }

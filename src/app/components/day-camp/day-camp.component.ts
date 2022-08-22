@@ -7,7 +7,7 @@ import {DayCamp} from "../../model/interfaces/day-camp";
   styleUrls: ['./day-camp.component.css']
 })
 export class DayCampComponent implements OnInit {
-  @Input() dayCamp!: DayCamp;
+  @Input() dayCamp?: DayCamp;
 
   constructor() { }
 
