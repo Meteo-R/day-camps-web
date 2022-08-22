@@ -37,7 +37,5 @@
     </tr>
   </table>
 
-  <div *ngIf="dayCamp?.children">
-    {{ dayCamp?.children }}
-  </div>
+  <app-children-table *ngIf="dayCamp?.children && dayCamp?.numberOfEnrolled" [children]="dayCamp?.children"></app-children-table>
 </div>

@@ -21,6 +21,7 @@ import { MyChildrenComponent } from './components/parent/my-children/my-children
 import { EnrollChildComponent } from './components/parent/enroll-child/enroll-child.component';
 import { EnrollmentsComponent } from './components/parent/enrollments/enrollments.component';
 import { MyDayCampsComponent } from './components/school/my-day-camps/my-day-camps.component';
+import { ChildrenTableComponent } from './components/school/children/children-table/children-table.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MyDayCampsComponent } from './components/school/my-day-camps/my-day-cam
     MyChildrenComponent,
     EnrollChildComponent,
     EnrollmentsComponent,
-    MyDayCampsComponent
+    MyDayCampsComponent,
+    ChildrenTableComponent
   ],
   imports: [
     BrowserModule,

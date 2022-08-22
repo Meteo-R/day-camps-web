@@ -1,0 +1,15 @@
+<p class="fw-bold pt-2 mb-0">Children:</p>
+<table>
+  <tr>
+    <th>Child name</th>
+    <th>Parent name</th>
+    <th>Phone</th>
+    <th>Email</th>
+  </tr>
+  <tr *ngFor="let child of children">
+    <td>{{child.firstName}} {{child.lastName}}</td>
+    <td>{{child.parent.firstName}} {{child.parent.lastName}}</td>
+    <td>{{child.parent.phone}}</td>
+    <td>{{child.parent.email}}</td>
+  </tr>
+</table>
