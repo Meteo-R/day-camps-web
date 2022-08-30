@@ -1,6 +1,6 @@
 <div>
   <h2 class="mt-5">Add day camp</h2>
-  <button class="btn btn-primary mt-4">Click to add day camp</button>
+  <button class="btn btn-primary mt-4" (click)="openAddDayCampModal(addDayCampContent)">Add day camp</button>
   <h2 class="mt-5">My day camps</h2>
 
   <h4 class="mt-4">Ongoing</h4>
@@ -28,3 +28,124 @@
   </div>
 
 </div>
+
+<ng-template #addDayCampContent let-addDayCampModal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add day camp</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="addDayCampModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addDayCampForm">
+      <div class="form-group">
+        <label for="addDayCampName">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          id="addDayCampName"
+          formControlName="name"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addDayCampForm.get('name')?.hasError('required') && addDayCampForm.get('name')?.touched">
+            Name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addDayCampDescription">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          id="addDayCampDescription"
+          formControlName="description"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addDayCampForm.get('description')?.hasError('required') && addDayCampForm.get('description')?.touched">
+            Description is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addDayCampStartDate">Start date</label>
+        <input
+          type="date"
+          class="form-control"
+          name="startDate"
+          id="addDayCampStartDate"
+          formControlName="startDate"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addDayCampForm.get('startDate')?.hasError('required') && addDayCampForm.get('startDate')?.touched">
+            Start date is required
+          </div>
+          <div *ngIf="addDayCampForm.get('startDate')?.hasError('startDateBeforeTomorrow') && addDayCampForm.get('startDate')?.touched">
+            Start date must be tomorrow at the earliest
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addDayCampEndDate">End date</label>
+        <input
+          type="date"
+          class="form-control"
+          name="endDate"
+          id="addDayCampEndDate"
+          formControlName="endDate"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addDayCampForm.get('endDate')?.hasError('required') && addDayCampForm.get('endDate')?.touched">
+            End date is required
+          </div>
+          <div *ngIf="addDayCampForm.hasError('endDateBeforeStartDate') && addDayCampForm.get('endDate')?.touched">
+            End date cannot be before start date
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addDayCampPrice">Price</label>
+        <input
+          type="number"
+          class="form-control"
+          name="price"
+          id="addDayCampPrice"
+          formControlName="price"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addDayCampForm.get('price')?.hasError('required') && addDayCampForm.get('price')?.touched">
+            Price is required
+          </div>
+          <div *ngIf="addDayCampForm.get('price')?.hasError('pattern') && addDayCampForm.get('price')?.touched">
+            Invalid format
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addDayCampCapacity">Capacity</label>
+        <input
+          type="number"
+          class="form-control"
+          name="capacity"
+          id="addDayCampCapacity"
+          formControlName="capacity"
+        >
+        <div class="alert-danger">
+          <div *ngIf="addDayCampForm.get('capacity')?.hasError('required') && addDayCampForm.get('capacity')?.touched">
+            Capacity is required
+          </div>
+          <div *ngIf="addDayCampForm.get('capacity')?.hasError('pattern') && addDayCampForm.get('capacity')?.touched">
+            Invalid format
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="addDayCampModal.close()">
+      Cancel
+    </button>
+    <button class="btn btn-primary" [disabled]="addDayCampForm.invalid" (click)="onAddDayCampSubmit(); addDayCampModal.close();">
+      Submit
+    </button>
+  </div>
+</ng-template>
