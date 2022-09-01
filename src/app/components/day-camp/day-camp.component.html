@@ -1,4 +1,4 @@
-<div class="container">
+<div>
   <h3>
     {{ dayCamp?.name }}
     <span *ngIf="dayCamp && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) >= 2 && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) <= 3"
@@ -36,6 +36,4 @@
       <td>email: {{ dayCamp?.school?.email }}, phone: {{ dayCamp?.school?.phone }}</td>
     </tr>
   </table>
-
-  <app-children-table *ngIf="dayCamp?.children && dayCamp?.numberOfEnrolled" [children]="dayCamp?.children"></app-children-table>
 </div>

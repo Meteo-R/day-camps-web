@@ -43,6 +43,6 @@ export class ChildrenService {
     return this.httpClient.put(CHILDREN_URL + editChildForm.value.id, {
       firstName: editChildForm.value.firstName,
       lastName: editChildForm.value.lastName
-    }, httpOptions)
+    }, httpOptions);
   }
 }

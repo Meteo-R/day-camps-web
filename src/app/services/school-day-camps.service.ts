@@ -47,4 +47,15 @@ export class SchoolDayCampsService {
       capacity: addDayCampForm.value.capacity
     }, httpOptions);
   }
+
+  editDayCamp(editDayCampForm: FormGroup): Observable<any> {
+    return this.httpClient.put(SCHOOL_DAY_CAMPS_URL + '/' + editDayCampForm.value.id, {
+      name: editDayCampForm.value.name,
+      description: editDayCampForm.value.description,
+      startDate: editDayCampForm.getRawValue().startDate,
+      endDate: editDayCampForm.getRawValue().endDate,
+      price: editDayCampForm.value.price,
+      capacity: editDayCampForm.value.capacity
+    }, httpOptions);
+  }
 }
