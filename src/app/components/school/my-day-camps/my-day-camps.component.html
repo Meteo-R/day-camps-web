@@ -6,8 +6,10 @@
   <h4 class="mt-4">Ongoing</h4>
   <div class="container" *ngIf="ongoingDayCamps?.length">
     <ng-container *ngFor="let ongoingDayCamp of ongoingDayCamps">
-      <app-day-camp [dayCamp]="ongoingDayCamp"></app-day-camp>
-      <app-children-table *ngIf="ongoingDayCamp?.children && ongoingDayCamp?.numberOfEnrolled" [children]="ongoingDayCamp?.children"></app-children-table>
+      <div class="container">
+        <app-day-camp [dayCamp]="ongoingDayCamp"></app-day-camp>
+        <app-children-table *ngIf="ongoingDayCamp?.children && ongoingDayCamp?.numberOfEnrolled" [children]="ongoingDayCamp?.children"></app-children-table>
+      </div>
     </ng-container>
   </div>
   <div class="container" *ngIf="!ongoingDayCamps?.length">
@@ -31,8 +33,10 @@
   <h4 class="mt-4">Completed</h4>
   <div class="container" *ngIf="pastDayCamps?.length">
     <ng-container *ngFor="let pastDayCamp of pastDayCamps">
-      <app-day-camp [dayCamp]="pastDayCamp"></app-day-camp>
-      <app-children-table *ngIf="pastDayCamp?.children && pastDayCamp?.numberOfEnrolled" [children]="pastDayCamp?.children"></app-children-table>
+      <div class="container">
+        <app-day-camp [dayCamp]="pastDayCamp"></app-day-camp>
+        <app-children-table *ngIf="pastDayCamp?.children && pastDayCamp?.numberOfEnrolled" [children]="pastDayCamp?.children"></app-children-table>
+      </div>
     </ng-container>
   </div>
   <div class="container" *ngIf="!pastDayCamps?.length">

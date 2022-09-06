@@ -1,7 +1,11 @@
 <div>
   <h2 class="mt-5">Upcoming day camps</h2>
   <div class="container" *ngIf="futureDayCamps?.length">
-    <app-day-camp *ngFor="let futureDayCamp of futureDayCamps" [dayCamp]="futureDayCamp"></app-day-camp>
+    <ng-container *ngFor="let futureDayCamp of futureDayCamps">
+      <div class="container">
+        <app-day-camp [dayCamp]="futureDayCamp"></app-day-camp>
+      </div>
+    </ng-container>
   </div>
   <div class="container" *ngIf="!futureDayCamps?.length">
     <p>Currently, we don't have any upcoming day camps.</p>
@@ -9,7 +13,11 @@
 
   <h2 class="mt-4">Ongoing day camps</h2>
   <div class="container" *ngIf="ongoingDayCamps?.length">
-    <app-day-camp *ngFor="let ongoingDayCamp of ongoingDayCamps" [dayCamp]="ongoingDayCamp"></app-day-camp>
+    <ng-container *ngFor="let ongoingDayCamp of ongoingDayCamps">
+      <div class="container">
+        <app-day-camp [dayCamp]="ongoingDayCamp"></app-day-camp>
+      </div>
+    </ng-container>
   </div>
   <div class="container" *ngIf="!ongoingDayCamps?.length">
     <p>Currently, we don't have any ongoing day camps.</p>
@@ -17,7 +25,11 @@
 
   <h2 class="mt-4">Completed day camps</h2>
   <div class="container" *ngIf="pastDayCamps?.length">
-    <app-day-camp *ngFor="let pastDayCamp of pastDayCamps" [dayCamp]="pastDayCamp"></app-day-camp>
+    <ng-container *ngFor="let pastDayCamp of pastDayCamps">
+      <div class="container">
+        <app-day-camp [dayCamp]="pastDayCamp"></app-day-camp>
+      </div>
+    </ng-container>
   </div>
   <div class="container" *ngIf="!pastDayCamps?.length">
     <p>We don't have any completed day camps yet.</p>
