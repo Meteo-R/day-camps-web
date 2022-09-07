@@ -1,1 +1,49 @@
-<p>enrollments works!</p>
+<div>
+  <ng-container *ngIf="enrollments && enrollments.length > 0">
+    <ng-container *ngFor="let enrollment of enrollments">
+      <div class="mt-5">
+        <h1>{{enrollment.child.firstName}} {{enrollment.child.lastName}} enrollments</h1>
+      </div>
+      <div *ngIf="enrollment.dayCamps.length > 0">
+        <div class="container">
+          <ng-container *ngIf="getOngoing(enrollment.dayCamps).length > 0">
+            <div class="container">
+              <h2>Ongoing</h2>
+              <ng-container *ngFor="let dayCamp of getOngoing(enrollment.dayCamps)">
+                <div class="container">
+                  <app-day-camp [dayCamp]="dayCamp"></app-day-camp>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="getUpcoming(enrollment.dayCamps).length > 0">
+            <div class="container">
+              <h2>Upcoming</h2>
+              <ng-container *ngFor="let dayCamp of getUpcoming(enrollment.dayCamps)">
+                <div class="container">
+                  <app-day-camp [dayCamp]="dayCamp"></app-day-camp>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="getCompleted(enrollment.dayCamps).length > 0">
+            <div class="container">
+              <h2>Completed</h2>
+              <ng-container *ngFor="let dayCamp of getCompleted(enrollment.dayCamps)">
+                <div class="container">
+                  <app-day-camp [dayCamp]="dayCamp"></app-day-camp>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div *ngIf="enrollment.dayCamps.length === 0">
+        <span class="ms-3">Not enrolled</span>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container class="container" *ngIf="!enrollments || enrollments.length == 0">
+    <h2 class="mt-5">Your children are not enrolled in any day camp yet.</h2>
+  </ng-container>
+</div>
