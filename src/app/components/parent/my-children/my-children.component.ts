@@ -100,7 +100,7 @@ export class MyChildrenComponent implements OnInit {
     this.editChildForm.reset();
   }
 
-  private resetChildToDelete() {
+  private resetChildToDelete(): void {
     this.childToDelete = null;
     this.isChildDeletable = false;
   }

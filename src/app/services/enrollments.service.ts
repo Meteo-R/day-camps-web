@@ -16,4 +16,8 @@ export class EnrollmentsService {
   getEnrollments(): Observable<EnrollmentsResponse> {
     return this.httpClient.get<EnrollmentsResponse>(ENROLLMENTS_URL, {responseType: 'json'})
   }
+
+  unenrollChild(childId: number, dayCampId: number): Observable<any> {
+    return this.httpClient.delete(ENROLLMENTS_URL + childId + "/" + dayCampId);
+  }
 }

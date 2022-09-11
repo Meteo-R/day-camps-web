@@ -22,6 +22,7 @@
               <ng-container *ngFor="let dayCamp of getUpcoming(enrollment.dayCamps)">
                 <div class="container">
                   <app-day-camp [dayCamp]="dayCamp"></app-day-camp>
+                  <button class="btn btn-primary" (click)="openUnenrollModal(unenrollContent, enrollment.child, dayCamp)">Unenroll</button>
                 </div>
               </ng-container>
             </div>
@@ -47,3 +48,21 @@
     <h2 class="mt-5">Your children are not enrolled in any day camp yet.</h2>
   </ng-container>
 </div>
+
+<ng-template #unenrollContent let-unenrollModal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm unenrollment</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="unenrollModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to unenroll {{childToUnenroll?.firstName}} {{childToUnenroll?.lastName}} from day camp "{{dayCampToUnenrollFrom?.name}}"?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="unenrollModal.close()">
+      No
+    </button>
+    <button class="btn btn-primary" (click)="onUnenrollSubmit(); unenrollModal.close();">
+      Yes
+    </button>
+  </div>
+</ng-template>

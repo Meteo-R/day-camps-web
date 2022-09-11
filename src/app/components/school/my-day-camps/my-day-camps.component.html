@@ -21,7 +21,7 @@
     <ng-container *ngFor="let futureDayCamp of futureDayCamps">
       <div class="container">
         <app-day-camp [dayCamp]="futureDayCamp"></app-day-camp>
-        <button class="btn btn-outline-success m-1" (click)="openEditDayCampModal(editDayCampContent, futureDayCamp)">Edit</button>
+        <button class="btn btn-primary m-1" (click)="openEditDayCampModal(editDayCampContent, futureDayCamp)">Edit</button>
         <app-children-table *ngIf="futureDayCamp?.children && futureDayCamp?.numberOfEnrolled" [children]="futureDayCamp?.children"></app-children-table>
       </div>
     </ng-container>
