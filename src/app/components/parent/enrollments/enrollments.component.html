@@ -1,4 +1,5 @@
 <div>
+  <div class="snackbar" [class.show-snackbar]="showUnenrollSnackbar">Child unenrolled successfully!</div>
   <ng-container *ngIf="enrollments && enrollments.length > 0">
     <ng-container *ngFor="let enrollment of enrollments">
       <div class="mt-5">

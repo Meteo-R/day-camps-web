@@ -15,6 +15,9 @@ export class MyChildrenComponent implements OnInit {
   public editChildForm!: FormGroup;
   public childToDelete?: Child | null;
   public isChildDeletable: boolean = false;
+  public showAddChildSnackbar: boolean = false;
+  public showDeleteChildSnackbar: boolean = false;
+  public showEditChildSnackbar: boolean = false;
 
   constructor(
     private childrenService: ChildrenService,
@@ -72,7 +75,11 @@ export class MyChildrenComponent implements OnInit {
 
   onAddChildSubmit(): void {
     this.childrenService.addChild(this.addChildForm).subscribe({
-      next: value => this.getChildren(),
+      next: value => {
+        this.getChildren();
+        this.showAddChildSnackbar = true;
+        setTimeout(() => this.showAddChildSnackbar = false, 2900);
+      },
       error: err => {
         console.log(err);
       }
@@ -82,7 +89,11 @@ export class MyChildrenComponent implements OnInit {
 
   onDeleteChildSubmit(): void {
     this.childrenService.deleteChild(this.childToDelete!.id).subscribe({
-      next: () => this.getChildren(),
+      next: () => {
+        this.getChildren();
+        this.showDeleteChildSnackbar = true;
+        setTimeout(() => this.showDeleteChildSnackbar = false, 2900);
+      },
       error: err => {
         console.log(err);
       }
@@ -92,7 +103,11 @@ export class MyChildrenComponent implements OnInit {
 
   onEditChildSubmit(): void {
     this.childrenService.editChild(this.editChildForm).subscribe({
-      next: value => this.getChildren(),
+      next: value => {
+        this.getChildren();
+        this.showEditChildSnackbar = true;
+        setTimeout(() => this.showEditChildSnackbar = false, 2900);
+      },
       error: err => {
         console.log(err);
       }

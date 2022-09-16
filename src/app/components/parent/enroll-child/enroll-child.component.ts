@@ -14,7 +14,7 @@ export class EnrollChildComponent implements OnInit {
   public selectedChild: Child | null = null;
   public possibleDayCamps!: DayCamp[];
 
-  showSnackbar: boolean = false;
+  showEnrollSnackbar: boolean = false;
 
   constructor(
     private childrenService: ChildrenService,
@@ -37,8 +37,8 @@ export class EnrollChildComponent implements OnInit {
     if (child != null) {
       this.enrollmentsService.enrollChild(child.id, dayCamp.id).subscribe({
         next: value => {
-          this.showSnackbar = true;
-          setTimeout(() => this.showSnackbar = false, 2900);
+          this.showEnrollSnackbar = true;
+          setTimeout(() => this.showEnrollSnackbar = false, 2900);
           this.refreshPossibleDayCamps(child);
         },
         error: err => console.log(err)

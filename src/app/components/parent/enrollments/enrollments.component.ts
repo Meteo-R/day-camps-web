@@ -14,6 +14,7 @@ export class EnrollmentsComponent implements OnInit {
   public enrollments!: Enrollment[];
   public childToUnenroll?: Child | null;
   public dayCampToUnenrollFrom?: DayCamp | null;
+  public showUnenrollSnackbar: boolean = false;
 
   constructor(
     private enrollmentsService: EnrollmentsService,
@@ -74,7 +75,11 @@ export class EnrollmentsComponent implements OnInit {
 
   onUnenrollSubmit() {
     this.enrollmentsService.unenrollChild(this.childToUnenroll!.id, this.dayCampToUnenrollFrom!.id).subscribe({
-      next: () => this.getEnrollments(),
+      next: () => {
+        this.getEnrollments();
+        this.showUnenrollSnackbar = true;
+        setTimeout(() => this.showUnenrollSnackbar = false, 2900);
+      },
       error: err => {
         console.log(err);
       }

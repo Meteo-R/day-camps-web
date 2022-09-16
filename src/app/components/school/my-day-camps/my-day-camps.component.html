@@ -1,4 +1,6 @@
 <div>
+  <div class="snackbar" [class.show-snackbar]="showAddDayCampSnackbar">Day camp added successfully!</div>
+  <div class="snackbar" [class.show-snackbar]="showEditDayCampSnackbar">Day camp edited successfully!</div>
   <h2 class="mt-5">Add day camp</h2>
   <button class="btn btn-primary mt-4" (click)="openAddDayCampModal(addDayCampContent)">Add day camp</button>
   <h2 class="mt-5">My day camps</h2>

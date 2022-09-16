@@ -15,6 +15,8 @@ export class MyDayCampsComponent implements OnInit {
   public pastDayCamps?: DayCamp[];
   public addDayCampForm!: FormGroup;
   public editDayCampForm!: FormGroup;
+  public showAddDayCampSnackbar: boolean = false;
+  public showEditDayCampSnackbar: boolean = false;
 
   constructor(
     private schoolDayCampsService: SchoolDayCampsService,
@@ -69,7 +71,11 @@ export class MyDayCampsComponent implements OnInit {
 
   onAddDayCampSubmit() {
     this.schoolDayCampsService.addDayCamp(this.addDayCampForm).subscribe({
-      next: value => this.getDayCamps(),
+      next: value => {
+        this.getDayCamps();
+        this.showAddDayCampSnackbar = true;
+        setTimeout(() => this.showAddDayCampSnackbar = false, 2900);
+      },
       error: err => {
         console.log(err);
       }
@@ -99,7 +105,11 @@ export class MyDayCampsComponent implements OnInit {
 
   onEditDayCampSubmit() {
     this.schoolDayCampsService.editDayCamp(this.editDayCampForm).subscribe({
-      next: value => this.getDayCamps(),
+      next: value => {
+        this.getDayCamps();
+        this.showEditDayCampSnackbar = true;
+        setTimeout(() => this.showEditDayCampSnackbar = false, 2900);
+      },
       error: err => {
         console.log(err);
       }
