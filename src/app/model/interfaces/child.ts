@@ -4,5 +4,5 @@ export interface Child {
   id: number;
   firstName: string;
   lastName: string;
-  parent: Parent;
+  parent?: Parent;
 }

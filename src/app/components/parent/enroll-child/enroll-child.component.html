@@ -1,1 +1,31 @@
-<p>enroll-child works!</p>
+<div>
+  <div id="snackbar" [class.show]="showSnackbar">Child enrolled successfully!</div>
+  <div class="child-select">
+    <label class="h4" for="selectedChild">Child</label>
+    <select
+      type="text"
+      class="form-control arrow-minimal"
+      [class.text-muted]="!selectedChild"
+      name="selectedChild"
+      id="selectedChild"
+      [(ngModel)]="selectedChild"
+      required
+      (change)="onChildChange(selectedChild)"
+    >
+      <option disabled selected hidden [ngValue]="null">Select child...</option>
+      <option class="text-black" *ngFor="let child of children" [ngValue]="child">{{child.firstName}} {{child.lastName}}</option>
+    </select>
+  </div>
+  <div *ngIf="possibleDayCamps && possibleDayCamps.length > 0">
+    <h3>Your child can be enrolled in the following day camps:</h3>
+    <ng-container *ngFor="let dayCamp of possibleDayCamps">
+      <div class="container">
+        <app-day-camp [dayCamp]="dayCamp"></app-day-camp>
+        <button class="btn btn-primary" (click)="onEnroll(selectedChild, dayCamp)">Enroll</button>
+      </div>
+    </ng-container>
+  </div>
+  <div *ngIf="possibleDayCamps && possibleDayCamps.length === 0">
+    <h3>Currently, we do not offer day camps for which your child can be enrolled.</h3>
+  </div>
+</div>
