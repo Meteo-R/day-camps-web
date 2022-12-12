@@ -1,10 +1,12 @@
 <div>
   <h3>
     {{ dayCamp?.name }}
-    <span *ngIf="dayCamp && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) >= 2 && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) <= 3"
-          class="last-spots">(last spots!)</span>
-    <span *ngIf="dayCamp && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) == 1" class="last-spots">(last spot!)</span>
-    <span *ngIf="dayCamp && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) <= 0" class="enrollment-closed">(enrollment closed)</span>
+    <ng-container *ngIf="isUpcoming()">
+      <span *ngIf="dayCamp && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) >= 2 && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) <= 3"
+            class="last-spots">(last spots!)</span>
+      <span *ngIf="dayCamp && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) == 1" class="last-spots">(last spot!)</span>
+      <span *ngIf="dayCamp && (dayCamp?.capacity ?? 0) - (dayCamp?.numberOfEnrolled ?? 0) <= 0" class="enrollment-closed">(enrollment closed)</span>
+    </ng-container>
   </h3>
   <div>
     {{ dayCamp?.description }}

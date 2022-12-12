@@ -14,4 +14,13 @@ export class DayCampComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isUpcoming() {
+    if (this.dayCamp?.startDate) {
+      const startDate = new Date(this.dayCamp?.startDate);
+      const today = new Date();
+
+      return startDate > today;
+    }
+    return false;
+  }
 }
